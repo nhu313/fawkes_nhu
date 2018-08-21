@@ -7,6 +7,8 @@ defmodule Fawkes.Schedule.Audience do
     field :name, :string
     field :slug, :string
 
+    has_many :talks, Fawkes.Schedule.Talk
+
     timestamps()
   end
 
