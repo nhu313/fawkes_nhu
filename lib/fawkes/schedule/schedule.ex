@@ -6,4 +6,10 @@ defmodule Fawkes.Schedule do
     Repo.all(Category)
   end
 
+  def create_category(attrs \\ %{}) do
+    %Category{}
+    |> Category.changeset(attrs)
+    |> Repo.insert()
+  end
+
 end

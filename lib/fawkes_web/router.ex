@@ -21,6 +21,9 @@ defmodule FawkesWeb.Router do
 
     get "/categories", CategoryController, :index
 
+    post "/categories", CategoryController, :create
+
+
   end
 
   # Other scopes may use custom stacks.
