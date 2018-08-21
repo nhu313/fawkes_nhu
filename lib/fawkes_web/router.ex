@@ -22,7 +22,7 @@ defmodule FawkesWeb.Router do
     get "/categories", CategoryController, :index
 
     post "/categories", CategoryController, :create
-
+    resources "/audiences", AudienceController
 
   end
 
