@@ -17,7 +17,7 @@ defmodule Fawkes.Schedule.Category do
   def changeset(category, attrs) do
     category
     |> cast(attrs, [:slug, :name, :icon_url])
-    |> validate_required([:slug, :name, :icon_url])
+    |> validate_required([:slug, :name])
     |> unique_constraint(:slug)
   end
 end
