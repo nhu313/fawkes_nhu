@@ -3,20 +3,27 @@ defmodule Fawkes.Schedule.Seed.Speaker do
   alias Fawkes.Repo
 
   def perform do
-    Enum.each(data(), fn(attrs) ->
+    talks = fetch_all_talk_by_slug()
+    Enum.each(data(), &(create(&1, talks)))
+  end
+
+  defp create(attrs, talks) do
+    talk = talks[attrs[:talk_slug]]
+    attrs = Map.put(attrs, :talk, talk)
+
       %Speaker{}
       |> Speaker.changeset(attrs)
       |> Repo.insert()
-    end)
   end
 
   def data do
     [
       %{
         slug: :jose_valim,
+        talk_slug: "slot_3_jose_valim",
         image_url: "https://avatars1.githubusercontent.com/u/9582",
-        first: "José",
-        last: "Valim",
+        first_name: "José",
+        last_name: "Valim",
         company: "Plataformatec",
         github: "josevalim",
         twitter: "josevalim",
@@ -24,204 +31,225 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :lance_halvorsen,
+        talk_slug: "slot_5_lance_halvorsen",
         twitter: "lance_halvorsen",
-        image_url:         first: "Lance",
-        last: "Halvorsen",
+        image_url: "https://elixirconf.com/2018/images/speakers/lance-halvorsen.jpg",
+        first_name: "Lance",
+        last_name: "Halvorsen",
         company: "LeTote",
         github: "lancehalvorsen",
-"https://elixirconf.com/2018/images/speakers/lance-halvorsen.jpg",
         description: "Lance is a member of the Phoenix core team and author of Functional Web Development with Elixir, OTP, and Phoenix. He is currently a Senior Software Architect at LeTote living in Portland, OR."
       },
       %{
         slug: :anna_neyzberg,
+        talk_slug: "slot_5_anna_neyzberg",
         twitter: "aneyzb",
         image_url: "https://elixirconf.com/2018/images/speakers/anna-neyzberg.jpg",
-        first: "Anna ",
-        last: "Neyzberg",
+        first_name: "Anna ",
+        last_name: "Neyzberg",
         company: "Carbon Five",
         github: "aneyzberg",
         description: "Anna Neyzberg is a San Francisco native who has done a lot of work in the ruby community in SF and currently sits on the board of RailsBridge. She has taken this community organizing experience and 2 years ago co-founded ElixirBridge in SF- an organization that offers free weekend long workshops, with the goal of creating an inclusive welcoming space for under-represented populations in tech to learn elixir. By day she works as a Developer at Carbon Five. When not in front of a keyboard, she is trying to get better at climbing rocks."
       },
       %{
         slug: :luke_imhoff,
+        talk_slug: "slot_5_luke_imhoff",
         twitter: "KronicDeth",
         image_url: "https://elixirconf.com/2018/images/speakers/luke-imhoff.jpg",
-        first: "Luke",
-        last: "Imhoff",
+        first_name: "Luke",
+        last_name: "Imhoff",
         company: "DockYard",
         github: "KronicDeth",
         description: "Luke Imhoff has been writing Elixir since June 2014 and started writing IntelliJ Elixir in July 2014 after he couldn't find pre-existing support for Elixir for JetBrains IDEs he loved like Rubymine. While developing the plugin, he's found bugs in the native Elixir lexer and parser and the OTP debugger. He has 3 hex packages for JSONAPI: Alembic (validate format of JSONAPI), Calcinator (transport neutral JSONAPI, so you can use them for APIs and RPCs), and Retort (JSONAPI over JSONRPC over RabbitMQ for RPC). He hosts the Austin Elixir meetup on the 3rd Monday of each month."
       },
       %{
         slug: :bailey_miller,
+        talk_slug: "slot_6_bailey_miller",
         image_url: "https://elixirconf.com/2018/images/speakers/bailey-miller.jpg",
-        first: "Bailey",
-        last: "Miller",
+        first_name: "Bailey",
+        last_name: "Miller",
         company: "Gaslight",
         github: "baileycmiller",
         description: "This session is co-presented by Bailey Miller and Tim Mecklem. Bailey creates amazing things as a designer at Gaslight (teamgaslight.com) and has written about her experience working with Phoenix from a front end developer perspective. Tim is a developer at Gaslight, where he builds exciting software and helps people build themselves. They have presented separately at conferences like Adobe Jam and ElixirConf, and this is their first time teaming up to show how design and development complement each other."
       },
       %{
         slug: :fahad_almusharraf,
+        talk_slug: "slot_6_fahad_almusharraf",
         twitter: "ifahad7",
         image_url: "https://elixirconf.com/2018/images/speakers/fahad-almusharraf.jpg",
-        first: "Fahad",
-        last: "Almusharraf",
+        first_name: "Fahad",
+        last_name: "Almusharraf",
         company: "Student",
         github: "falmusha",
         description: "I'm a Computer Engineer and graduate student currently researching ways to automate behavioral change in smoking cessation through the use of artificially intelligent conversational systems."
       },
       %{
         slug: :manu_ajith,
+        talk_slug: "slot_6_manu_ajith",
         twitter: "manusajith",
         image_url: "https://elixirconf.com/2018/images/speakers/manu-ajith.jpg",
-        first: "Manu",
-        last: "Ajith",
+        first_name: "Manu",
+        last_name: "Ajith",
         company: "9Piecesof8 Software Labs",
         github: "manusajith",
         description: "Manu is a tech entrepreneur and software engineer with a passion for building scalable web systems. He is a polyglot developer who primarily uses Ruby, Elixir, and Go at work, but also keeps a keen eye on other functional paradigms like Haskell. These days, he is into building systems using Domain Driven Design, CQRS, and Event Sourcing. Manu is also a travel enthusiast, an aspiring nomad, who has roamed 26 countries so far and plans to visit the rest soon."
       },
       %{
         slug: :aaron_renner,
+        talk_slug: "slot_8_aaron_renner",
         twitter: "bayfieldcoder",
         image_url: "https://elixirconf.com/2018/images/speakers/aaron-renner.jpg",
-        first: "Aaron",
-        last: "Renner",
+        first_name: "Aaron",
+        last_name: "Renner",
         company: "ActiveProspect",
         github: "aaronrenner",
         description: "Aaron has been developing software professionally for 10+ years and has been writing Elixir full time since 2016. He has been the technical co-founder for multiple startups and can only imagine the money he would have saved on servers if he had found Elixir sooner. Aaron enjoys clean code, refactoring and studying application design. When he’s not in front of the computer, Aaron enjoys cycling, camping and family road trips."
       },
       %{
         slug: :justus_eapen,
+        talk_slug: "slot_8_justus_eapen",
         twitter: "justuseapen",
         image_url: "https://elixirconf.com/2018/images/speakers/justus-eapen.jpg",
-        first: "Justus",
-        last: "Eapen",
+        first_name: "Justus",
+        last_name: "Eapen",
         company: "SmartLogic",
         github: "Github: justuseapen",
         description: "Justus is an Elixir Developer and AI Enthusiast from Baltimore. He's best known for his work on the Pavlok shocking wristband and designing single-page calendars. Accepting rap cypher invitations."
       },
       %{
         slug: :aish_dahal,
+        talk_slug: "slot_8_aish_dahal",
         twitter: "aishrajdahal",
         image_url: "https://elixirconf.com/2018/images/speakers/aish-dahal.jpg",
-        first: "Aish",
-        last: "Dahal",
+        first_name: "Aish",
+        last_name: "Dahal",
         company: "PagerDuty",
         github: "aishraj",
         description: "Aish works as an Engineer at PagerDuty in San Francisco. He current works in building PagerDuty’s event intelligence platform often dealing with fallacies of distributed computing. His recent focus has been on Elixir/OTP and building event driven microservices using Kafka and Elixir. In the past he has worked as an early stage employee at HackerRank as well as a programmer at Goldman Sachs."
       },
       %{
         slug: :catherine_zoller,
+        talk_slug: "slot_9_catherine_zoller",
         twitter: "mojo_cathy",
         image_url: "https://elixirconf.com/2018/images/speakers/catherine-zoller.jpg",
-        first: "Catherine",
-        last: "Zoller",
+        first_name: "Catherine",
+        last_name: "Zoller",
         company: "Mojotech",
         github: "cathyzoller",
         description: "Catherine Zoller is a software engineer in Boulder at Mojotech. Lately she spends her days working with React and Elixir. On summer weekends you’ll find her in the garden building a habitat for birds, bees & butterflies. When the snow flies (winter is coming) she spins yarn, knits socks, and programs in Elixir."
       },
       %{
         slug: :david_schainker,
+        talk_slug: "slot_9_david_schainker",
         image_url: "https://elixirconf.com/2018/images/speakers/david-schainker.jpg",
-        first: "David",
-        last: "Schainker",
+        first_name: "David",
+        last_name: "Schainker",
         github: "schainker",
         twitter: "schainks",
         description: "David is a software developer who has spent the past five years focusing on building pragmatically in the IoT, \"Gig Economy\", and Education industries. After building his first Phoenix project in 2016, he has been hooked on bringing more functional programming into his production environments and tending to his herb garden when he's not out hiking."
       },
       %{
         slug: :maciej_kaszubowski,
+        talk_slug: "slot_9_maciej_kaszubowski",
         twitter: "mkaszubowski94",
         image_url: "https://elixirconf.com/2018/images/speakers/maciej-kaszubowski.jpg",
-        first: "Maciej",
-        last: "Kaszubowski",
+        first_name: "Maciej",
+        last_name: "Kaszubowski",
         company: "AppUnite",
         github: "mkaszubowski",
         description: "Maciej is a developer at AppUnite where he's been using Elixir for about two years now. Interested in software architecture, distributed systems, data synchronisation and consistency guarantees. Currently writing his Master’s Thesis on CRDTs. A frequent speaker and co-organiser of Poznań Elixir Meetup. Started to love speaking even more after giving a talk at ElixirConfEU 2018."
       },
       %{
         slug: :aaron_votre,
+        talk_slug: "slot_b_aaron_votre",
         twitter: "ShamshirzDev",
         image_url: "https://elixirconf.com/2018/images/speakers/aaron-votre.jpg",
-        first: "Aaron",
-        last: "Votre",
+        first_name: "Aaron",
+        last_name: "Votre",
         company: "Corvus Insurance",
         github: "shamshirz",
         description: "Aaron is an adventurer of all things software. He came to Elixir from a Java and Node background to fall in love with the community and the functional coding style. Currently working for Corvus Insurance, Aaron writes primarily in Elm and Elixir while experimenting with game development in his spare time. Often found in his natural habitat of soccer fields located near coffee shops."
       },
       %{
         slug: :frank_kumro,
+        talk_slug: "slot_b_frank_kumro",
         image_url: "https://elixirconf.com/2018/images/speakers/frank-kumro.jpg",
-        first: "Frank",
-        last: "Kumro",
+        first_name: "Frank",
+        last_name: "Kumro",
         github: "fkumro",
         twitter: "frigidcode",
         description: "Frank Kumro is a software engineer from Buffalo, NY. He loves working with Elixir/Nerves, playing with his kids, and working on his car. Enjoys long walks on the beach, pina coladas and getting caught in the rain."
       },
       %{
         slug: :ben_marx,
+        talk_slug: "slot_b_ben_marx",
         twitter: "bgmarx",
         image_url: "https://elixirconf.com/2018/images/speakers/ben-marx.jpg",
-        first: "Ben",
-        last: "Marx",
+        first_name: "Ben",
+        last_name: "Marx",
         company: "Bleacher Report",
         github: "bgmarx",
         description: "Ben is the software architect at Bleacher Report, co-author of Adopting Elixir and co-organizer of the Erlang Elixir meet up in San Francisco. In his free time, he's also programming in Rust, playing guitar, and building guitar pedals."
       },
       %{
         slug: :anil_wadghule,
+        talk_slug: "slot_c_anil_wadghule",
         twitter: "anildigital",
         image_url: "https://elixirconf.com/2018/images/speakers/anil-wadghule.jpg",
-        first: "Anil",
-        last: "Wadghule",
+        first_name: "Anil",
+        last_name: "Wadghule",
         company: "Skatter",
         github: "anildigital",
         description: "Anil was a long time Ruby developer, then turned Polyglot developer to do Node.js, Java, and Scala. For last 1.5 years, he is writing an Elixir Phoenix web application to build a team collaboration product. This product involves WebRTC and chat taking full benefit of BEAM's way of concurrency and OTP abstractions. Anil loves to listen to world music. He is an avid reader. Anil is interested in solving problems with better software architectures and learning distributed systems."
       },
       %{
         slug: :todd_resudek,
+        talk_slug: "slot_c_todd_resudek",
         twitter: "sprsmpl",
         image_url: "https://elixirconf.com/2018/images/speakers/todd-resudek.jpg",
-        first: "Todd",
-        last: "Resudek",
+        first_name: "Todd",
+        last_name: "Resudek",
         company: "Weedmaps",
         github: "supersimple",
         description: "I am a reformed graphic designer that got my start in web development 15 years ago. I have made a career in front-end development, PHP, Rails, and for the last year or so, in Elixir. I am a contributor to hex and hex.pm and in my spare time I tinker with hardware projects."
       },
       %{
         slug: :mathew_gardner,
+        talk_slug: "slot_c_mathew_gardner",
         image_url: "https://elixirconf.com/2018/images/speakers/mathew-gardner.jpg",
-        first: "Mathew",
-        last: "Gardner",
+        first_name: "Mathew",
+        last_name: "Gardner",
         company: "Toyota Connected",
         github: "mathewdgardner",
         description: "Mathew is a software engineer at Toyota Connected where he helps to power mobility. He graduated with a computer science degree from the University of North Texas and enjoys all things tech. He's always learning new technologies to hone his craft, and lately, it's been all about machine learning."
       },
       %{
         slug: :justin_schneck,
+        talk_slug: "slot_h_justin_schneck",
         image_url: "https://elixirconf.com/2018/images/trainers/justin-schneck.jpg",
-        first: "Justin",
-        last: "Schneck",
+        first_name: "Justin",
+        last_name: "Schneck",
         github: "mobileoverlord",
         twitter: "mobileoverlord",
         description: "I’m in a constant state of wanting to make the world around me bend to my imagination. At one time I wondered how hard it would be to start my motorcycle from my phone. Rewiring the motorcycle and writing an interface was easy, but connecting it all together proved to be a challenge. A challenge that would define my career. That invisible, often impenetrable layer in the air between all the hardware in the world has become my stomping ground. Hardware is hard, so I’ve been working on nerves to make it easy."
       },
       %{
         slug: :renan_ranelli,
+        talk_slug: "slot_j_renan_ranelli",
         twitter: "renanranelli",
         image_url: "https://elixirconf.com/2018/images/speakers/renan-ranelli.jpg",
-        first: "Renan",
-        last: "Ranelli",
+        first_name: "Renan",
+        last_name: "Ranelli",
         company: "Telnyx LLC",
         github: "rranelli",
         description: "I'm a Brazilian software developer focused on backend, operations and databases, working with Elixir since 2015. I worked in companies both very large and very small. I'm also a frequent speaker in technology events in Brazil, and have spoken numerous times about elixir, both locally and abroad. Currently, I work remotely for Telnyx LLC, a Chicago based company whose mission is to democratize global comunications. When I'm not talking about software, I like to cook, make cocktails and dance."
       },
       %{
         slug: :james_smith,
+        talk_slug: "slot_j_james_smith",
         image_url: "http://elixirconf.com/2018/images/speakers/james-smith.jpg",
-        first: "James",
-        last: "Smith",
+        first_name: "James",
+        last_name: "Smith",
         company: "Gaslight",
         github: "st23am",
         twitter: "st23am",
@@ -229,18 +257,20 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :michael_stalker,
+        talk_slug: "slot_j_michael_stalker",
         image_url: "http://elixirconf.com/2018/images/speakers/michael-stalker.jpg",
-        first: "Michael",
-        last: "Stalker",
+        first_name: "Michael",
+        last_name: "Stalker",
         company: "RentPath",
         github: "michaelstalker",
         description: "Michael is a senior software engineer at RentPath, currently working with Elixir. He got into programming by dabbling in BASIC and writing games for his TI-82 calculator. Michael entered the world of web development in 2007. A few years afterward, he discovered the joy of testing and TDD."
       },
       %{
         slug: :jeff_schomay,
+        talk_slug: "slot_k_jeff_schomay",
         image_url: "http://elixirconf.com/2018/images/speakers/jeff-schomay.jpg",
-        first: "Jeff",
-        last: "Schomay",
+        first_name: "Jeff",
+        last_name: "Schomay",
         company: "Adobe (Seattle)",
         github: "jschomay",
         twitter: "jschomay",
@@ -248,18 +278,20 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :zach_porter,
+        talk_slug: "slot_k_zach_porter",
         image_url: "http://elixirconf.com/2018/images/speakers/zach-porter.jpg",
-        first: "Zach",
-        last: "Porter",
+        first_name: "Zach",
+        last_name: "Porter",
         company: "Viget",
         github: "zporter",
         description: "For the past decade, Zach has been helping several companies solve problems with software written in a variety of languages and frameworks. Zach is currently a Senior Developer at Viget where he provides custom software solutions for a mix of companies including Dick's Sporting Goods, the Wildlife Conservation Society, and the Privia Health Group."
       },
       %{
         slug: :andrew_bennett,
+        talk_slug: "slot_k_andrew_bennett",
         image_url: "https://elixirconf.com/2018/images/speakers/andrew-bennett.jpg",
-        first: "Andrew",
-        last: "Bennett",
+        first_name: "Andrew",
+        last_name: "Bennett",
         company: "Toyota Connected",
         github: "potatosalad",
         twitter: "potatosaladx",
@@ -267,9 +299,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :eric_oestrich,
+        talk_slug: "slot_m_eric_oestrich",
         image_url: "http://elixirconf.com/2018/images/speakers/eric-oestrich.jpg",
-        first: "Eric",
-        last: "Oestrich",
+        first_name: "Eric",
+        last_name: "Oestrich",
         company: "SmartLogic, LLC",
         github: "oestrich",
         twitter: "ericoestrich",
@@ -277,9 +310,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :daniel_azuma,
+        talk_slug: "slot_m_daniel_azuma",
         image_url: "http://elixirconf.com/2018/images/speakers/daniel-azuma.jpg",
-        first: "Daniel",
-        last: "Azuma",
+        first_name: "Daniel",
+        last_name: "Azuma",
         company: "Google",
         github: "dazuma",
         twitter: "danielazuma",
@@ -287,17 +321,19 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :rafal_studnicki,
+        talk_slug: "slot_m_rafal_studnicki",
         image_url: "http://elixirconf.com/2018/images/speakers/rafal-studnicki.jpg",
-        first: "Rafal",
-        last: "Studnicki",
+        first_name: "Rafal",
+        last_name: "Studnicki",
         github: "studzien",
         description: "Rafal and Simon have spent the last few years building and running distributed BEAM systems in production, in various professional roles."
       },
       %{
         slug: :emerson_macedo,
+        talk_slug: "slot_n_emerson_macedo",
         image_url: "http://elixirconf.com/2018/images/speakers/emerson-macedo.jpg",
-        first: "Emerson",
-        last: "Macedo",
+        first_name: "Emerson",
+        last_name: "Macedo",
         company: "OLX Brazil",
         github: "emerleite",
         twitter: "emerleite",
@@ -305,9 +341,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :jerel_unruh,
+        talk_slug: "slot_n_jerel_unruh",
         image_url: "http://elixirconf.com/2018/images/speakers/jerel-unruh.jpg",
-        first: "Jerel",
-        last: "Unruh",
+        first_name: "Jerel",
+        last_name: "Unruh",
         company: "Toyota Connected",
         github: "jerel",
         twitter: "jerelunruh",
@@ -315,9 +352,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :boyd_multerer,
+        talk_slug: "slot_n_boyd_multerer",
         image_url: "http://elixirconf.com/2018/images/speakers/boyd-multerer.jpg",
-        first: "Boyd",
-        last: "Multerer",
+        first_name: "Boyd",
+        last_name: "Multerer",
         company: "Kry10 Industries",
         github: "boydm",
         twitter: "boydmulterer",
@@ -325,9 +363,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :joao_britto,
+        talk_slug: "slot_p_joao_britto",
         image_url: "http://elixirconf.com/2018/images/speakers/joao-britto.jpg",
-        first: "João",
-        last: "Britto",
+        first_name: "João",
+        last_name: "Britto",
         company: "Plataformatec",
         github: "britto",
         twitter: "noteu",
@@ -335,17 +374,19 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :jeffrey_gillis,
+        talk_slug: "slot_p_jeffrey_gillis",
         image_url: "http://elixirconf.com/2018/images/speakers/jeffrey-gillis.jpg",
-        first: "Jeffrey",
-        last: "Gillis",
+        first_name: "Jeffrey",
+        last_name: "Gillis",
         company: "Optoro, Inc.",
         description: "Jeffrey Gillis is an Infrastructure Engineer at Optoro, Inc. He loves to learn new technologies and programming languages to solve difficult problems. He spends his free time with his wife and three children playing outdoors in their home state of West Virginia."
       },
       %{
         slug: :dan_mcguire,
+        talk_slug: "slot_p_dan_mcguire",
         image_url: "http://elixirconf.com/2018/images/speakers/dan-mcguire.jpg",
-        first: "Dan",
-        last: "McGuire",
+        first_name: "Dan",
+        last_name: "McGuire",
         company: "Rentpath",
         github: "dgmcguire",
         twitter: "dgmcguire",
@@ -353,9 +394,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :alex_garibay,
+        talk_slug: "slot_q_alex_garibay",
         image_url: "http://elixirconf.com/2018/images/speakers/alex-garibay.jpg",
-        first: "Alex",
-        last: "Garibay",
+        first_name: "Alex",
+        last_name: "Garibay",
         company: "DockYard",
         github: "alexgaribay",
         twitter: "_alexgaribay",
@@ -363,9 +405,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :guilherme_de_maio,
+        talk_slug: "slot_q_guilherme_de_maio",
         image_url: "http://elixirconf.com/2018/images/speakers/guilherme-de-maio.jpg",
-        first: "Guilherme",
-        last: "de Maio",
+        first_name: "Guilherme",
+        last_name: "de Maio",
         company: "Telnyx",
         github: "nirev",
         twitter: "nirev",
@@ -373,9 +416,10 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :enio_lopes,
+        talk_slug: "slot_q_enio_lopes",
         image_url: "http://elixirconf.com/2018/images/speakers/enio-lopes.jpg",
-        first: "Enio",
-        last: "Lopes",
+        first_name: "Enio",
+        last_name: "Lopes",
         company: "uSwitch",
         github: "eniolopes",
         twitter: "eniolps",
@@ -383,13 +427,22 @@ defmodule Fawkes.Schedule.Seed.Speaker do
       },
       %{
         slug: :chris_mccord,
+        talk_slug: "slot_t_chris_mccord",
         image_url: "http://elixirconf.com/2018/images/trainers/chris-mccord.jpg",
-        first: "Chris",
-        last: "McCord",
+        first_name: "Chris",
+        last_name: "McCord",
         github: "chrismccord",
         twitter: "chris_mccord",
         description: "Chris McCord is a programmer with a passion for science and building things. He spends his time crafting the Phoenix Framework, working with the fine folks at DockYard, writing books like Metaprogramming Elixir, and teaching others the tools of the trade."
       }
     ]
+  end
+
+  defp fetch_all_talk_by_slug do
+    Fawkes.Schedule.Talk
+    |> Repo.all
+    |> Enum.reduce(%{}, fn(talk, acc) ->
+         Map.put(acc, talk.slug, talk)
+       end)
   end
 end

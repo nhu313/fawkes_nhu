@@ -9,7 +9,7 @@ defmodule Fawkes.Schedule.Seed do
   alias Fawkes.Schedule.Seed.Speaker
   alias Fawkes.Schedule.Seed.Talk
 
-  def perform do
+  def seed do
     Slot.perform()
     Speaker.perform()
     Location.perform()
