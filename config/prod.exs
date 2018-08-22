@@ -68,5 +68,5 @@ config :fawkes, FawkesWeb.Endpoint,
 config :fawkes, Fawkes.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 15, # The amount of database connections in the pool
+  pool_size: 2, # The amount of database connections in the pool
   ssl: true
