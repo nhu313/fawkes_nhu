@@ -1,4 +1,5 @@
 defmodule Fawkes.Schedule do
+  import Ecto.Query, warn: false
   alias Fawkes.Repo
   alias Fawkes.Schedule.Category
 
@@ -409,7 +410,9 @@ defmodule Fawkes.Schedule do
 
   """
   def list_talks do
-    Repo.all(Talk)
+    Talk
+    |> preload([:slot, :speakers, :categories, :audience, :location])
+    |> Repo.all()
   end
 
   @doc """
@@ -426,8 +429,11 @@ defmodule Fawkes.Schedule do
       ** (Ecto.NoResultsError)
 
   """
-  def get_talk!(id), do: Repo.get!(Talk, id)
-
+  def get_talk!(id) do
+    Talk
+    |> preload([:slot, :speakers, :categories, :audience, :location])
+    |> Repo.get_by!(id: id)
+  end
   @doc """
   Creates a talk.
 
@@ -505,7 +511,9 @@ defmodule Fawkes.Schedule do
 
   """
   def list_speakers do
-    Repo.all(Speaker)
+    Speaker
+    |> preload(:talk)
+    |> Repo.all()
   end
 
   @doc """
@@ -522,7 +530,11 @@ defmodule Fawkes.Schedule do
       ** (Ecto.NoResultsError)
 
   """
-  def get_speaker!(id), do: Repo.get!(Speaker, id)
+  def get_speaker!(id) do
+    Speaker
+    |> preload(talk: [:slot, :categories, :audience, :location])
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a speaker.

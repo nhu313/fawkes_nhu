@@ -10,12 +10,12 @@ defmodule Fawkes.Schedule.Seed do
   alias Fawkes.Schedule.Seed.Talk
 
   def seed do
-    Slot.perform()
+    # Category.perform()
+    # Audience.perform()
+    # Slot.perform()
+    # Location.perform()
+    # Event.perform()
+    # Talk.perform()
     Speaker.perform()
-    Location.perform()
-    Category.perform()
-    Audience.perform()
-    Talk.perform()
-    Event.perform()
   end
 end

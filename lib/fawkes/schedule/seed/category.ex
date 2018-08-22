@@ -6,85 +6,81 @@ defmodule Fawkes.Schedule.Seed.Category do
     Enum.each(data(), fn(attrs) ->
       %Category{}
       |> Category.changeset(attrs)
-      |> Repo.insert()
+      |> Repo.insert!()
     end)
   end
 
   def data do
     [
       %{
-        slug: :blockchain,
+        slug: "blockchain",
         name: "Blockchain"
       },
       %{
-        slug: :bots,
+        slug: "bots",
         name: "Bots"
       },
       %{
-        slug: :code_quality,
+        slug: "code_quality",
         name: "Code Quality"
       },
       %{
-        slug: :deployment,
+        slug: "deployment",
         name: "Deployment"
       },
       %{
-        slug: :distributed_systems,
+        slug: "distributed_systems",
         name: "Distributed Systems"
       },
       %{
-        slug: :elixir,
+        slug: "elixir",
         name: "Elixir"
       },
       %{
-        slug: :genstage,
+        slug: "genstage",
         name: "GenStage"
       },
       %{
-        slug: :hex,
+        slug: "hex",
         name: "Hex"
       },
       %{
-        slug: :keynote,
+        slug: "keynote",
         name: "Keynote"
       },
       %{
-        slug: :nerves,
+        slug: "nerves",
         name: "Nerves",
         icon_url: "https://nhu313.github.io/phoenix_basic_instructions/images/icons/nerves.svg"
       },
       %{
-        slug: :nif,
+        slug: "nif",
         name: "NIF"
       },
       %{
-        slug: :phoenix,
+        slug: "phoenix",
         name: "Phoenix",
         icon_url: "https://nhu313.github.io/phoenix_basic_instructions/images/icons/phoenix.svg"
       },
       %{
-        slug: :phoenix_production,
-        name: "Phoenix / Production"
-      },
-      %{
-        slug: :production,
+        slug: "production",
         name: "Production"
       },
       %{
-        slug: :testing,
+        slug: "testing",
         name: "Testing"
       },
       %{
-        slug: :ui,
+        slug: "ui",
         name: "UI"
       },
       %{
-        slug: :otp,
+        slug: "otp",
         name: "OTP",
         icon_url: "https://nhu313.github.io/phoenix_basic_instructions/images/icons/otp.svg"
       },
       %{
-        slug: :monitoring,
+        slug: "monitoring",
         name: "Monitoring"
       }
     ]

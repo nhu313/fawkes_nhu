@@ -8,26 +8,26 @@ defmodule Fawkes.Schedule.Seed.Audience do
     Enum.each(data(), fn attrs ->
       %Audience{}
       |> Audience.changeset(attrs)
-      |> Repo.insert()
+      |> Repo.insert!()
     end)
   end
 
   def data do
     [
       %{
-        slug: :general,
+        slug: "general",
         name: "General"
       },
       %{
-        slug: :beginner,
+        slug: "beginner",
         name: "Beginner"
       },
       %{
-        slug: :intermediate,
+        slug: "intermediate",
         name: "Intermediate"
       },
       %{
-        slug: :advanced,
+        slug: "advanced",
         name: "Advanced"
       }
     ]

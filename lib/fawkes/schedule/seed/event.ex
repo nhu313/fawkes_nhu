@@ -13,81 +13,81 @@ defmodule Fawkes.Schedule.Seed.Event do
     |> Enum.each(fn attrs ->
       %Event{}
       |> Event.changeset(attrs)
-      |> Repo.insert()
+      |> Repo.insert!()
     end)
   end
 
   def data(relations) do
     [
       %{
-        slug: :day_1_registration,
+        slug: "day_1_registration",
         name: "Registration",
-        slot_id: relations[:slot_1]
+        slot_id: relations["slot_1"]
       },
       %{
-        slug: :day_1_welcome,
+        slug: "day_1_welcome",
         name: "Welcome",
-        slot_id: relations[:slot_2]
+        slot_id: relations["slot_2"]
       },
       %{
-        slug: :break_1,
+        slug: "break_1",
         name: "Break",
-        slot_id: relations[:slot_4]
+        slot_id: relations["slot_4"]
       },
       %{
-        slug: :day_1_lunch,
+        slug: "day_1_lunch",
         name: "Lunch",
-        slot_id: relations[:slot_7]
+        slot_id: relations["slot_7"]
       },
       %{
-        slug: :break_2,
+        slug: "break_2",
         name: "Break",
-        slot_id: relations[:slot_a]
+        slot_id: relations["slot_a"]
       },
       %{
-        slug: :break_3,
+        slug: "break_3",
         name: "Break",
-        slot_id: relations[:slot_d]
+        slot_id: relations["slot_d"]
       },
       %{
-        slug: :lightning_talks,
+        slug: "lightning_talks",
         name: "Lightning Talks",
-        slot_id: relations[:slot_e]
+        slot_id: relations["slot_e"]
       },
       %{
-        slug: :day_2_registration,
+        slug: "day_2_registration",
         name: "Registration",
-        slot_id: relations[:slot_f]
+        slot_id: relations["slot_f"]
       },
       %{
-        slug: :day_2_welcome,
+        slug: "day_2_welcome",
         name: "Welcome",
-        slot_id: relations[:slot_g]
+        slot_id: relations["slot_g"]
       },
       %{
-        slug: :break_4,
+        slug: "break_4",
         name: "Break",
-        slot_id: relations[:slot_i]
+        slot_id: relations["slot_i"]
       },
       %{
-        slug: :day_2_lunch,
+        slug: "day_2_lunch",
         name: "Lunch",
-        slot_id: relations[:slot_l]
+        slot_id: relations["slot_l"]
       },
       %{
-        slug: :break_5,
+        slug: "break_5",
         name: "Break",
-        slot_id: relations[:slot_o]
+        slot_id: relations["slot_o"]
       },
       %{
-        slug: :break_6,
+        slug: "break_6",
         name: "Break",
-        slot_id: relations[:slot_r]
+        slot_id: relations["slot_r"]
       },
       %{
-        slug: :closing_remarks,
+        slug: "closing_remarks",
         name: "Closing Remarks",
-        slot_id: relations[:slot_s]
+        slot_id: relations["slot_s"]
       }
     ]
   end

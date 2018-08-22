@@ -5,7 +5,7 @@ defmodule Fawkes.TalkCategory do
     belongs_to :talk, Fawkes.Talk, foreign_key: :talk_id
     belongs_to :category, Fawkes.Category, foreign_key: :category_id
 
-    timestamps()
+    # timestamps()
   end
 
   @doc """

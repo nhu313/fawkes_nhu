@@ -6,7 +6,7 @@ defmodule Fawkes.Repo.Migrations.CreateTalkCategory do
       add :talk_id, references(:talks, on_delete: :nothing)
       add :category_id, references(:categories, on_delete: :nothing)
 
-      timestamps()
+      # timestamps()
     end
 
     create index(:talks_categories, [:talk_id])

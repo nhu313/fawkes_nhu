@@ -14,8 +14,8 @@ defmodule Fawkes.Schedule.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:slug, :name])
-    |> validate_required([:slug, :name])
+    |> cast(attrs, [:slug, :name, :slot_id])
+    |> validate_required([:slug, :name, :slot_id])
     |> unique_constraint(:slug)
   end
 end
