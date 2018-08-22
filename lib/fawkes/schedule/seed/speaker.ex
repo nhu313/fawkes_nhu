@@ -7,7 +7,7 @@ defmodule Fawkes.Schedule.Seed.Speaker do
     # Enum.each(data(), &(create(&1, talks)))
 
 
-    fetch_all_talk_by_slug
+    fetch_all_talk_by_slug()
     |> data()
     |> Enum.each(fn(attrs) ->
         %Speaker{}

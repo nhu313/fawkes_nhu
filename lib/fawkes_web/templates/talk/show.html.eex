@@ -52,7 +52,7 @@
   <hr />
   <h4 class="subheader">Checked in attendees</h4>
   <div class="row attendee">
-    <%= for x <- (1..10) do %>
+    <%= for _ <- (1..10) do %>
       <div class="card col-sm-3">
         <div class="card-body">
           <img src="https://elixirconf.com/2018/images/speakers/boyd-multerer.jpg" class="rounded-circle">

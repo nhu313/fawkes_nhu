@@ -1,11 +1,9 @@
 defmodule Fawkes.Schedule.Seed.Talk do
-  import Ecto.Query
   alias Fawkes.Schedule.Talk
   alias Fawkes.Schedule.Audience
   alias Fawkes.Schedule.Category
   alias Fawkes.Schedule.Location
   alias Fawkes.Schedule.Slot
-  alias Fawkes.Schedule.Speaker
   alias Fawkes.Repo
 
   def perform do
