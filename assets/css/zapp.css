@@ -183,7 +183,6 @@ hr {
 }
 
 .talk__audience {
-  background-color: #4B285B;
   color: #FFF;
   border-radius: 50px;
   text-transform: uppercase;
@@ -192,7 +191,7 @@ hr {
 }
 
 .talk__category {
-  /* background-color: #4B285B; */
+  background-color: #4B285B;
   color: #FFF;
   border-radius: 50px;
   text-transform: uppercase;
