@@ -30,7 +30,7 @@
         <div class="col-sm-3">
           <img src="<%= speaker.image_url %>" class="rounded-circle">
         </div>
-        <div class="col-sm-8 speaker__info">
+        <div class="col-sm-7 speaker__info">
           <a href="/speakers/<%= speaker.id %>"<h4><%= full_name(speaker) %></h4></a>
           <div class="speaker__handle">
             <i class="fab fa-github"></i> @<%= speaker.github %>
