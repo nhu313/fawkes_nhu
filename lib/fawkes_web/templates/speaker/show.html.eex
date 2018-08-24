@@ -4,7 +4,7 @@
       <img src="<%= @speaker.image_url %>" class="rounded-circle speaker-details__pic">
       <div class="clearfix"></div>
       <div class="speaker__info">
-        <h4><%= FawkesWeb.TalkView.full_name(@speaker) %></h4>
+        <h4><%= FawkesWeb.SharedView.full_name(@speaker) %></h4>
         <div class="speaker__handle">
           <i class="fab fa-github"></i> @<%= @speaker.github %>
         </div>
@@ -24,9 +24,9 @@
   <div class="card">
     <div class="card-body">
       <a href="/talks/<%= @speaker.talk.id %>" class="float-right schedule__talk-link"><i class="fas fa-angle-right"></i></a>
-      <p class="subtext"><%= FawkesWeb.TalkView.format_date(@speaker.talk.slot.start_time) %> <%= FawkesWeb.TalkView.format_time(@speaker.talk.slot.start_time) %> - <%= FawkesWeb.TalkView.format_time(@speaker.talk.slot.end_time) %></p>
+      <p class="subtext"><%= Timex.format!(slot.start_time, "%-I:%M %p", :strftime)%> - <%= Timex.format!(slot.end_time, "%-I:%M %p", :strftime) %></p>
       <a href="/talks/<%= @speaker.talk.id %>"><h3 class="schedule__talk-title"><%= @speaker.talk.title %></h3></a>
-      <div class="schedule__details"><%= FawkesWeb.TalkView.full_name(@speaker) %> &nbsp; | &nbsp; <%= @speaker.talk.location.name %></div>
+      <div class="schedule__details"><%= FawkesWeb.SharedView.full_name(@speaker) %> &nbsp; | &nbsp; <%= @speaker.talk.location.name %></div>
       <p class="icons">
         <button class="btn talk__audience"><%= @speaker.talk.audience.name %></button>
         <%= for category <- @speaker.talk.categories do %>

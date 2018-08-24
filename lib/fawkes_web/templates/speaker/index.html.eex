@@ -5,7 +5,7 @@
         <div class="card col-xs-4">
           <div class="card-body ">
             <img src="<%= speaker.image_url %>" class="rounded-circle">
-            <h4><%= link FawkesWeb.TalkView.full_name(speaker), to: speaker_path(@conn, :show, speaker) %></h4>
+            <h4><%= link FawkesWeb.SharedView.full_name(speaker), to: speaker_path(@conn, :show, speaker) %></h4>
             <p><%= link speaker.talk.title, to: "/talks/#{speaker.talk.id}" %></p>
           </div>
         </div>

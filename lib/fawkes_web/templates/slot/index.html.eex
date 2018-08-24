@@ -26,7 +26,7 @@
     <%= for {date, slots} <- @schedule_slots do %>
       <h2><%= Timex.format!(date, "%A  %m/%d/%y", :strftime)%></h2>
       <%= for slot <- slots do %>
-        <h4 class="subheader"><%= format_time(slot.start_time)%> - <%= format_time(slot.end_time) %></h4>
+        <h4 class="subheader"><%= Timex.format!(slot.start_time, "%-I:%M %p", :strftime)%> - <%= Timex.format!(slot.end_time, "%-I:%M %p", :strftime) %></h4>
         <%= if slot.event do %>
           <h3 class="gray"><%= slot.event.name %></h3>
         <% else %>
@@ -34,10 +34,10 @@
             <div class="card">
               <div class="card-body">
                 <div class="float-right schedule__talk-link"><i class="fas fa-angle-right"></i></div>
-                <p class="subtext"><%= format_time(slot.start_time)%> - <%= format_time(slot.end_time) %></p>
+                <p class="subtext"><%= Timex.format!(slot.start_time, "%-I:%M %p", :strftime)%> - <%= Timex.format!(slot.end_time, "%-I:%M %p", :strftime) %></p>
                 <a href="/talks/<%= talk.id %>"><h3 class="schedule__talk-title"><%= talk.title %></h3></a>
 
-                <div class="schedule__details"><%= FawkesWeb.TalkView.full_name(talk.speakers) %> &nbsp; | &nbsp; <%= talk.location.name %></div>
+                <div class="schedule__details"><%= FawkesWeb.SharedView.full_name(talk.speakers) %> &nbsp; | &nbsp; <%= talk.location.name %></div>
                 <p class="icons">
                   <button class="btn talk__audience"><%= talk.audience.name %></button>
                   <%= for category <- talk.categories do %>
