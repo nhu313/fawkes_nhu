@@ -3,7 +3,7 @@
     <div class="container">
       <div class="d-flex justify-content-center align-items-center dates">
         <i class="fas fa-arrow-left"></i>
-        <%= for date <- @dates do %>
+        <%= for date <- conference_dates() do %>
           <div class="card">
             <div class="card-body">
               <a href="/schedule_slots?date=<%= Timex.format!(date, "%Y-%m-%d", :strftime)%>">

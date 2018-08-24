@@ -7,10 +7,7 @@ defmodule FawkesWeb.SlotController do
   def index(conn, params) do
     schedule_slots = Schedule.list_schedule_slots(params["date"])
 
-    format = "{YYYY}-{0M}-{D}"
-
-    dates = [Timex.parse!("2018-09-04", format), Timex.parse!("2018-09-05", format), Timex.parse!("2018-09-06", format), Timex.parse!("2018-09-07", format)]
-    render(conn, "index.html", schedule_slots: schedule_slots, dates: dates)
+    render(conn, "index.html", schedule_slots: schedule_slots)
   end
 
   def new(conn, _params) do
