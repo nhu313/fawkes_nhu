@@ -24,7 +24,7 @@
   <div class="card">
     <div class="card-body">
       <a href="/talks/<%= @speaker.talk.id %>" class="float-right schedule__talk-link"><i class="fas fa-angle-right"></i></a>
-      <p class="subtext"><%= Timex.format!(slot.start_time, "%-I:%M %p", :strftime)%> - <%= Timex.format!(slot.end_time, "%-I:%M %p", :strftime) %></p>
+      <p class="subtext"><%= Timex.format!(@speaker.talk.slot.start_time, "%-I:%M %p", :strftime)%> - <%= Timex.format!(@speaker.talk.slot.end_time, "%-I:%M %p", :strftime) %></p>
       <a href="/talks/<%= @speaker.talk.id %>"><h3 class="schedule__talk-title"><%= @speaker.talk.title %></h3></a>
       <div class="schedule__details"><%= FawkesWeb.SharedView.full_name(@speaker) %> &nbsp; | &nbsp; <%= @speaker.talk.location.name %></div>
       <p class="icons">
