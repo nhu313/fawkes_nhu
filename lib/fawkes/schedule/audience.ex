@@ -2,7 +2,6 @@ defmodule Fawkes.Schedule.Audience do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "audiences" do
     field :name, :string
     field :slug, :string

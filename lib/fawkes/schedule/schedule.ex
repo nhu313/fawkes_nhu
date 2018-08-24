@@ -121,8 +121,27 @@ defmodule Fawkes.Schedule do
       [%Slot{}, ...]
 
   """
-  def list_schedule_slots do
-    Repo.all(Slot)
+  def list_schedule_slots(nil) do
+    Slot
+    |> preload([:event, talks: [:slot, :speakers, :categories, :audience, :location]])
+    |> order_by(asc: :start_time)
+    |> Repo.all()
+    |> Enum.group_by(&(Timex.beginning_of_day(&1.start_time)))
+  end
+
+  def list_schedule_slots(date) do
+    IO.inspect date
+    parsed_date = Timex.parse!(date, "%Y-%m-%d", :strftime)
+    IO.inspect parsed_date
+    beginning_of_day = Timex.beginning_of_day(parsed_date)
+    end_of_day = Timex.end_of_day(parsed_date)
+
+    Slot
+    |> where([slot], slot.start_time >= ^beginning_of_day and slot.start_time <= ^end_of_day)
+    |> preload([:event, talks: [:slot, :speakers, :categories, :audience, :location]])
+    |> order_by(asc: :start_time)
+    |> Repo.all()
+    |> Enum.group_by(&(Timex.beginning_of_day(&1.start_time)))
   end
 
   @doc """
