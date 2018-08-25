@@ -16,6 +16,6 @@ defmodule FawkesWeb.TalkView do
   end
 
   def full_name(person) do
-    person.first_name <> " " <> person.last_name
+    person.first <> " " <> person.last
   end
 end

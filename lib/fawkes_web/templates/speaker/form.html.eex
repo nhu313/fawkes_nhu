@@ -18,15 +18,15 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :first_name, class: "control-label" %>
-    <%= text_input f, :first_name, class: "form-control" %>
-    <%= error_tag f, :first_name %>
+    <%= label f, :first, class: "control-label" %>
+    <%= text_input f, :first, class: "form-control" %>
+    <%= error_tag f, :first %>
   </div>
 
   <div class="form-group">
-    <%= label f, :last_name, class: "control-label" %>
-    <%= text_input f, :last_name, class: "form-control" %>
-    <%= error_tag f, :last_name %>
+    <%= label f, :last, class: "control-label" %>
+    <%= text_input f, :last, class: "form-control" %>
+    <%= error_tag f, :last %>
   </div>
 
   <div class="form-group">

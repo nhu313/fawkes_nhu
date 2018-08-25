@@ -5,8 +5,8 @@ defmodule Fawkes.Repo.Migrations.CreateSpeakers do
     create table(:speakers) do
       add :slug, :string
       add :image_url, :string
-      add :first_name, :string
-      add :last_name, :string
+      add :first, :string
+      add :last, :string
       add :company, :string
       add :github, :string
       add :twitter, :string
